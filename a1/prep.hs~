@@ -116,5 +116,5 @@ harmonic_tr n	= harmon n 1.0
 harmon :: Integer -> Float -> Float
 harmon n accum
 	| n == 1	= 	accum
-	| n >  1	= 	harmon (n-1) ((1/(fromIntegral n)) + accum)
+	| n >  1	= 	harmon (n-1) (1/(fromIntegral n) + accum)
 	| otherwise = error "n cannot be negative"

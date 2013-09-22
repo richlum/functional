@@ -1,3 +1,8 @@
+-- Richard Lum
+-- student no: 41671785
+-- cs312 assign1 due 20130927
+-- ========================================================== 
+   
 -- a1, q1
 --pq =  8*pa*(s+c)/(3*pn*(d+n+i))
 -- preparednessQuotient i s c pn pa d n
