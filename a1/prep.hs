@@ -77,7 +77,7 @@ mult x y accumulator
 	| y == 0 	= 0
 	| x == 1 	= accumulator + y
 	| y == 1 	= accumulator + x
-	| otherwise 	= mult (x-1) y (accumulator+y)
+	| otherwise = mult (x-1) y (accumulator+y)
 
 
 -- a1, q5
@@ -87,7 +87,34 @@ power x y  -- x^y
 	| x == 1	= 1
 	| y == 0	= 1
 	| y == 1	= x
-	| otherwise 	= multiply x  (power x (y-1)) 	
+	| otherwise = multiply x  (power x (y-1)) 	
 
+-- a1 q6
+power_tr:: Integer -> Integer -> Integer
+power_tr x y = pow x y 1
 
+pow :: Integer -> Integer -> Integer  -> Integer
+pow x y accum
+	| x == 0	= 0
+	| x == 1	= 1
+	| y == 0	= 1
+	| y == 1	= multiply_tr x accum 
+	| otherwise = (pow x (y-1) (multiply_tr accum x))
+	
+	  
+-- a1 q7
+harmonic:: Integer -> Float
+harmonic n 
+	| n  <= 1	= 1
+	| n	 >= 1	= (1/(fromIntegral n))  + (harmonic (n-1)) 
+	| otherwise = error  "n cannot be negative"
+	
+-- a1, q8
+harmonic_tr :: Integer -> Float
+harmonic_tr n	= harmon n 1.0
 
+harmon :: Integer -> Float -> Float
+harmon n accum
+	| n == 1	= 	accum
+	| n >  1	= 	harmon (n-1) (1/(fromIntegral n) + accum)
+	| otherwise = error "n cannot be negative"
