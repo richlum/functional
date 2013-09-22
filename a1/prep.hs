@@ -2,7 +2,8 @@
 --pq =  8*pa*(s+c)/(3*pn*(d+n+i))
 -- preparednessQuotient i s c pn pa d n
 -- preparednessQuotient 2 2 2 2  2  2 2 = 1.78
-preparednessQuotient :: Float -> Float -> Float -> Float -> Float -> Float -> Float -> Float
+preparednessQuotient :: Float -> Float -> Float -> Float -> 
+	Float -> Float -> Float -> Float
 preparednessQuotient importance sleep_hrs cons_stims prep_needed prep_actual diff nerves = 
     (pqnumerator prep_actual sleep_hrs cons_stims)/ 
     (pqdenominator prep_needed diff nerves importance )
@@ -48,6 +49,45 @@ kprNumerator stress recog = 10 * (stress^2) * sqrt(recog)
 
 kprDenominator :: Float -> Float -> Float -> Float
 kprDenominator currBP foodTot foodFur = currBP * (foodTot -foodFur + 1) 
+
+-- a1, q3
+multiply:: Integer -> Integer -> Integer
+multiply 0 _ = 0
+multiply _ 0 = 0
+multiply 1 y = y
+multiply x 1 = x
+multiply x y = y + (multiply (x-1) y )
+-- alternative using guards
+gmult:: Integer -> Integer -> Integer
+gmult x y 
+	| x == 0  = 0
+	| y == 0  = 0
+	| x == 1  = y
+	| y == 1  = x
+	| otherwise = x + gmult (y-1) x
+
+
+-- a1, q4
+multiply_tr:: Integer -> Integer -> Integer
+multiply_tr x y = mult x y 0
+
+mult:: Integer -> Integer ->  Integer ->  Integer
+mult x y accumulator 
+	| x == 0 	= 0
+	| y == 0 	= 0
+	| x == 1 	= accumulator + y
+	| y == 1 	= accumulator + x
+	| otherwise 	= mult (x-1) y (accumulator+y)
+
+
+-- a1, q5
+power :: Integer -> Integer -> Integer
+power x y  -- x^y
+	| x == 0	= 0
+	| x == 1	= 1
+	| y == 0	= 1
+	| y == 1	= x
+	| otherwise 	= multiply x  (power x (y-1)) 	
 
 
 
