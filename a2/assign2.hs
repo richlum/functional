@@ -39,12 +39,24 @@ myremoveduplicates list1
 	| not( elem (head list1) (tail list1))	= (head list1) : (myremoveduplicates (tail list1))
 	| otherwise				= (head list1) : (myremoveduplicates (removeXfrXS (head list1) (tail list1)))
 
+
+
+rmdup_pm :: (Eq a) => a -> [a] -> [a]
+rmdup_pm x []           = []
+rmdup_pm x [y]          = if (x == y) then []
+                          else [y]
+rmdup_pm x (y:ys)	= if (x == y) then (rmdup_pm x ys)
+                          else (y:(rmdup_pm x ys))
+
+
+
 myremoveduplicates_pm :: (Eq a) => [a] -> [a] 
-myremoveduplicates_pm list1  
-	| list1 == []				= []
-	| tail list1 == []			= list1
-	| not( elem (head list1) (tail list1))	= (head list1) : (myremoveduplicates (tail list1))
-	| otherwise				= (head list1) : (myremoveduplicates (removeXfrXS (head list1) (tail list1)))
+myremoveduplicates_pm []        = []
+myremoveduplicates_pm [x]       = [x]
+myremoveduplicates_pm (x:xs)    = if (not (elem x xs)) then x:(myremoveduplicates_pm xs)
+                                  else (x:(myremoveduplicates_pm (rmdup_pm x xs)))
+  
+
 
 
 
