@@ -11,7 +11,9 @@ module Assign2
 (	myappend,
 	myappend_pm,
 	myremoveduplicates,
-	myremoveduplicates_pm
+	myremoveduplicates_pm,
+	myintersection,
+	myintersection_pm
 )	where
 
 myappend :: (Eq a) => [a] -> [a] -> [a]
@@ -57,6 +59,21 @@ myremoveduplicates_pm (x:xs)    = if (not (elem x xs)) then x:(myremoveduplicate
                                   else (x:(myremoveduplicates_pm (rmdup_pm x xs)))
   
 
+-- q2 myintersection
+-- note no testing for uniquness in either list input.
+myintersection::(Eq a) =>  [a] -> [a] -> [a]
+myintersection list1 list2
+	| list1 == []                  = []
+	| list2 == []	               = []
+	| elem (head list1) list2      = head list1 : (myintersection (tail list1) list2)
+	| not (elem(head list1) list2) = myintersection (tail list1) list2
+
+
+myintersection_pm::(Eq a) =>  [a] -> [a] -> [a]
+myintersection_pm [] list2       = []
+myintersection_pm list1 []       = []
+myintersection_pm (x:xs) list2   = if (elem x list2) then x:(myintersection_pm xs list2)
+                                   else myintersection_pm xs list2
 
 
 

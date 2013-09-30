@@ -39,4 +39,23 @@ atests = TestList[
 	]
 
 
+q21 = TestCase (assertEqual "q21" "bc"    ( myintersection "abc" "bcd"))
+q22 = TestCase (assertEqual "q22" [4,2,1] ( myintersection [3,4,2,1] [5,4,1,6,2] ))
+q23 = TestCase (assertEqual "q23" []      ( myintersection [] [1,2,3] ))
+q24 = TestCase (assertEqual "q24" ""      ( myintersection "abc" ""))
+q25 = TestCase (assertEqual "q25" [2,3,5] ( myintersection [1..10] [2,22,33,5,99,3]))
+q26 = TestCase (assertEqual "q26" "hoc"   ( myintersection "holycw" "batmanandrobinhaveicecream"))
+
+
+q21b = TestCase (assertEqual "q21b" "bc"    ( myintersection_pm "abc" "bcd"))
+q22b = TestCase (assertEqual "q22b" [4,2,1] ( myintersection_pm [3,4,2,1] [5,4,1,6,2] ))
+q23b = TestCase (assertEqual "q23b" []      ( myintersection_pm [] [1,2,3] ))
+q24b = TestCase (assertEqual "q24b" ""      ( myintersection_pm "abc" ""))
+q25b = TestCase (assertEqual "q25b" [2,3,5] ( myintersection_pm [1..10] [2,22,33,5,99,3]))
+q26b = TestCase (assertEqual "q26b" "hoc"   ( myintersection_pm "holycw" "batmanandrobinhaveicecream"))
+
+
+q2tests = TestList[ q21,q22,q23,q24,q25,q26, 
+		 q21b,q22b,q23b,q24b,q25b,q26b 
+ ]
 
