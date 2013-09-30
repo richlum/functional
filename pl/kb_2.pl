@@ -1,0 +1,67 @@
+vertical(line(point(X,Y),point(X,Z))).
+horizontal(line(point(X,Y),point(Z,Y))).
+
+% vertical(line(point(1,3),point(1,1))).
+% vertical(line(point(1,3),point(3,2))).
+% horizontal(line(point(1,1),point(2,Y))). 
+% horizontal(line(point(2,3),P)).     P = point(_G655, 3).  eg any x
+
+f(a).
+f(b).
+g(a).
+g(b).
+h(b).
+k(X) :- f(X), g(X), h(X).
+
+
+loves(vincent,mia).
+loves(marcellus,mia).
+
+jealous(A,B):- loves(A,C),loves(B,C).
+
+house_elf(dobby). 
+   witch(hermione). 
+   witch('McGonagall'). 
+   witch(rita_skeeter). 
+   magic(X):-  house_elf(X). 
+   magic(X):-  wizard(X). 
+   magic(X):-  witch(X).
+
+word(determiner,a). 
+   word(determiner,every). 
+   word(noun,criminal). 
+   word(noun,'big  kahuna  burger'). 
+   word(verb,eats). 
+   word(verb,likes). 
+    
+sentence(Word1,Word2,Word3,Word4,Word5):- 
+     word(determiner,Word1), 
+     word(noun,Word2), 
+     word(verb,Word3), 
+     word(determiner,Word4), 
+     word(noun,Word5).
+
+
+   word(astante,  a,s,t,a,n,t,e). 
+   word(astoria,  a,s,t,o,r,i,a). 
+   word(baratto,  b,a,r,a,t,t,o). 
+   word(cobalto,  c,o,b,a,l,t,o). 
+   word(pistola,  p,i,s,t,o,l,a). 
+   word(statale,  s,t,a,t,a,l,e).
+crossword(H1,H2,H3,V1,V2,V3):-
+	word(H1,A,B,C,D,E,F,G),
+	word(H2,H,I,J,K,L,M,N),
+	word(H3,O,P,Q,R,S,T,U),
+	word(V1,V ,B,W ,I,Y ,P,Z),
+	word(V2,Aa,D,Ab,K,Ac,R,Ad),
+	word(V3,Ae,F,Af,M,Ag,T,Ah).
+
+% crossword(A1,A2,A3,A4,A5,A6).
+
+cross2(H1,H2,H3,V1,V2,V3):-
+	word(H1,_,B,_,D,_,F,_),
+	word(H2,_,I,_,K,_,M,_),
+	word(H3,_,P,_,R,_,T,_),
+	word(V1,_,B,_,I,_,P,_),
+	word(V2,_,D,_,K,_,R,_),
+	word(V3,_,F,_,M,_,T,_).
