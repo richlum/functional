@@ -59,3 +59,28 @@ q2tests = TestList[ q21,q22,q23,q24,q25,q26,
 		 q21b,q22b,q23b,q24b,q25b,q26b 
  ]
 
+
+q31  = TestCase (assertEqual "q31b"  "abcd" ( mynthtail       0 "abcd"       )) 
+q32  = TestCase (assertEqual "q32b"  "bcd"  ( mynthtail       1 "abcd"       )) 
+q33  = TestCase (assertEqual "q33b"  "cd"   ( mynthtail       2 "abcd"       )) 
+q34  = TestCase (assertEqual "q34b"  "d"    ( mynthtail       3 "abcd"       ))  
+q35  = TestCase (assertEqual "q35b"  ""     ( mynthtail       4 "abcd"       )) 
+q36  = TestCase (assertEqual "q36b"  [3,4]  ( mynthtail       2 [1, 2, 3, 4] ))  
+q37  = TestCase (assertEqual "q37b"  []     ( mynthtail       4 [1, 2, 3, 4] ))
+                                                                               
+q31b = TestCase (assertEqual "q31b"  "abcd" ( mynthtail_pm    0 "abcd"       )) 
+q32b = TestCase (assertEqual "q32b"  "bcd"  ( mynthtail_pm    1 "abcd"       )) 
+q33b = TestCase (assertEqual "q33b"  "cd"   ( mynthtail_pm    2 "abcd"       )) 
+q34b = TestCase (assertEqual "q34b"  "d"    ( mynthtail_pm    3 "abcd"       ))  
+q35b = TestCase (assertEqual "q35b"  ""     ( mynthtail_pm    4 "abcd"       )) 
+q36b = TestCase (assertEqual "q36b"  [3,4]  ( mynthtail_pm    2 [1, 2, 3, 4] ))  
+q37b = TestCase (assertEqual "q37b"  []     ( mynthtail_pm    4 [1, 2, 3, 4] ))
+
+  
+q3tests = TestList[ q31,q32,q33,q34,q35,q36, 
+		 q31b,q32b,q33b,q34b,q35b,q36b 
+ ]
+
+
+
+alltests = TestList [ egtests, atests, q2tests, q3tests]

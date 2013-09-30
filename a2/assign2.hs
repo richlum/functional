@@ -13,7 +13,9 @@ module Assign2
 	myremoveduplicates,
 	myremoveduplicates_pm,
 	myintersection,
-	myintersection_pm
+	myintersection_pm,
+	mynthtail,
+	mynthtail_pm
 )	where
 
 myappend :: (Eq a) => [a] -> [a] -> [a]
@@ -74,6 +76,33 @@ myintersection_pm [] list2       = []
 myintersection_pm list1 []       = []
 myintersection_pm (x:xs) list2   = if (elem x list2) then x:(myintersection_pm xs list2)
                                    else myintersection_pm xs list2
+
+-- q3 mynthtail
+
+mynthtail :: Int -> [a] -> [a]
+mynthtail n list
+	| null list  = []
+	| n<0        = error "n less than zero"
+	| n == 0     = list
+	| otherwise  = mynthtail (n-1) (tail list)
+
+mynthtail_pm :: Int -> [a] ->  [a]
+mynthtail_pm 0 (x)   = x   
+mynthtail_pm n []     = []
+mynthtail_pm n (x:xs) = mynthtail_pm (n-1) xs
+
+-- q4 mylast
+mylast ::  [a] -> [a]
+mylast list 
+	| null list            = []
+	| (null (tail list) )  = [head list]
+	| otherwise            = (mylast (tail list))
+
+mylast_pm ::  [a] -> [a]
+mylast_pm []	= []
+mylast_pm (x:[])	= [x]
+mylast_pm (x:xs)= mylast_pm xs
+
 
 
 
