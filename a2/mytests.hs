@@ -81,6 +81,71 @@ q3tests = TestList[ q31,q32,q33,q34,q35,q36,
 		 q31b,q32b,q33b,q34b,q35b,q36b 
  ]
 
+ 
+q41  = TestCase (assertEqual "q41 " ""    ( mylast     ""            ))
+q42  = TestCase (assertEqual "q42 " "b"   ( mylast     "b"           ))
+q43  = TestCase (assertEqual "q43 " "d"   ( mylast     "abcd"        ))
+q44  = TestCase (assertEqual "q44 " [4]   ( mylast     [1, 2, 3, 4]  ))
+-- keep the compiler happy with empty list type specifier
+q45  = TestCase (assertEqual "q45 " ([]::[Int])    ( mylast     []            ))
+q46  = TestCase (assertEqual "q46 " [100] ( mylast     [1..100]      ))
+q47  = TestCase (assertEqual "q47 " [-50] ( mylast    [100,99..(-50)]))
+    
+ 
+q41b = TestCase (assertEqual "q41b" ""    ( mylast_pm ""            ))
+q42b = TestCase (assertEqual "q42b" "b"   ( mylast_pm "b"           ))
+q43b = TestCase (assertEqual "q43b" "d"   ( mylast_pm "abcd"        ))
+q44b = TestCase (assertEqual "q44b" [4]   ( mylast_pm [1, 2, 3, 4]  ))
+q45b = TestCase (assertEqual "q45b" ([]::[Int])   ( mylast_pm []            ))
+q46b = TestCase (assertEqual "q46b" [100] ( mylast_pm [1..100]      ))
+q47b = TestCase (assertEqual "q47b" [-50] ( mylast_pm[100,99..(-50)]))
 
+q4tests = TestList[ q41,q42,q43,q44,q45,q46, 
+		 q41b,q42b,q43b,q44b,q45b,q46b 
+ ]
 
-alltests = TestList [ egtests, atests, q2tests, q3tests]
+q51 = TestCase (assertEqual "q51"  ""       ( myreverse "" 			 ))
+q52 = TestCase (assertEqual "q52"  "cba"    ( myreverse "abc" 		 ))
+q53 = TestCase (assertEqual "q53"  [3, 2, 1]( myreverse [1, 2, 3] 	 ))
+q54 = TestCase (assertEqual "q54"  []       ( myreverse [] 			 ))
+ 
+q51b = TestCase (assertEqual "q51b"  ""       ( myreverse_pm "" 			 ))
+q52b = TestCase (assertEqual "q52b"  "cba"    ( myreverse_pm "abc" 		 ))
+q53b = TestCase (assertEqual "q53b"  [3, 2, 1]( myreverse_pm [1, 2, 3] 	 ))
+q54b = TestCase (assertEqual "q54b"  []       ( myreverse_pm [] 			 ))
+                                     
+q5test = TestList[ q51, q52, q53, q54, 
+					q51b, q52b, q53b, q54b ]
+					
+					
+q61	 = TestCase (assertEqual "q61"  [3,0,3,1,3,2,3]  ( myreplaceall 3 7 [7,0,7,1,7,2,7] ))	
+q62	 = TestCase (assertEqual "q62"  ""				 ( myreplaceall 'x' 'a' "" 			))  
+q63	 = TestCase (assertEqual "q63"  "xbxcxd"		 ( myreplaceall 'x' 'a' "abacad" 	))	
+q61b = TestCase (assertEqual "q61b"  [3,0,3,1,3,2,3] ( myreplaceall_pm 3 7 [7,0,7,1,7,2,7] ))	
+q62b = TestCase (assertEqual "q62b"  ""				 ( myreplaceall_pm 'x' 'a' "" 			))  
+q63b = TestCase (assertEqual "q63b"  "xbxcxd"		 ( myreplaceall_pm 'x' 'a' "abacad" 	))	  
+
+q6test = TestList[ q61, q62, q63, q64, 
+					q61b, q62b, q63b, q64b ]
+                                   
+									 
+q71  = TestCase (assertEqual "q71" True	  ( myordered [] 		))
+q72  = TestCase (assertEqual "q72" True	  ( myordered [1] 		))
+q73  = TestCase (assertEqual "q73" True	  ( myordered [1,2]		))
+q74  = TestCase (assertEqual "q74" True	  ( myordered [1,1] 	))
+q75  = TestCase (assertEqual "q75" False  ( myordered [2,1] 	))
+q76  = TestCase (assertEqual "q76" True	  ( myordered "abcdefg" ))
+q77  = TestCase (assertEqual "q77" False  ( myordered "ba" 		))
+q71b = TestCase (assertEqual "q71b" True  ( myordered_pm [] 	))
+q72b = TestCase (assertEqual "q72b" True  ( myordered_pm [1] 	))
+q73b = TestCase (assertEqual "q73b" True  ( myordered_pm [1,2]	))
+q74b = TestCase (assertEqual "q74b" True  ( myordered_pm [1,1] 	))
+q75b = TestCase (assertEqual "q75b" False ( myordered_pm [2,1] 	))
+q76b = TestCase (assertEqual "q76b" True  ( myordered_pm "abcdefg" ))
+q77b = TestCase (assertEqual "q77b" False ( myordered_pm "ba" 	))
+ 
+q7test = TestList [ q71, q72, q73, q74,q75,q76,q77, 
+					q71b, q72b, q73b, q74b,q75b,q76b,q77b ]
+ 
+
+alltests = TestList [ egtests, atests, q2tests, q3tests, q4tests]

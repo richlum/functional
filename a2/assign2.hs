@@ -8,14 +8,14 @@
 -- example
 
 module Assign2
-(	myappend,
-	myappend_pm,
-	myremoveduplicates,
-	myremoveduplicates_pm,
-	myintersection,
-	myintersection_pm,
-	mynthtail,
-	mynthtail_pm
+(	myappend,			myappend_pm,
+	myremoveduplicates,	myremoveduplicates_pm,
+	myintersection,		myintersection_pm,
+	mynthtail,			mynthtail_pm,
+	mylast, 			mylast_pm,	
+	myreverse,			myreverse_pm,
+	myreplaceall,		myreplaceall_pm,
+	myordered,			myordered_pm
 )	where
 
 myappend :: (Eq a) => [a] -> [a] -> [a]
@@ -99,10 +99,67 @@ mylast list
 	| otherwise            = (mylast (tail list))
 
 mylast_pm ::  [a] -> [a]
-mylast_pm []	= []
+mylast_pm []		= []
 mylast_pm (x:[])	= [x]
-mylast_pm (x:xs)= mylast_pm xs
+mylast_pm (x:xs)	= mylast_pm xs
 
+-- q5 myreverse
 
+--myreverse :: [a] -> [a]
+-- this works but It violates the design restriction to use of head and tail only
+myreverse' list
+	| null list 		= []
+	| null (tail list)	= list
+	| otherwise			= last(list) : myreverse' (init list)
+-- heres a version that uses parameter outlist to hold reversed list
+-- that gets built up as we rise back out from the recursion depth
+-- this allows us to only use the cons operator (a:[a])  and still
+-- reverse order   
+revlist :: [a] -> [a] -> [a]
+revlist inlist outlist
+	| null inlist		= outlist
+	| otherwise			= revlist ( tail inlist)  ((head inlist):outlist) 
 
+myreverse : [a] -> [a]
+myreverse list
+	| null list 		= []
+	| null (tail list)	= list
+	| otherwise			= revlist(tail list) [(head list)]
 
+	
+revlist_pm :: [a] -> [a] -> [a]
+revlist_pm inlist outlist
+	| null inlist		= outlist
+	| otherwise			= revlist_pm ( tail inlist)  ((head inlist):outlist) 
+	
+myreverse : [a] -> [a]
+myreverse_pm list
+myreverse_pm []			= []
+myreverse_pm (x,[])		= [x]
+myreverse_pm (x,xs)		= revlist_pm(tail list) [(head list)]
+	
+
+myreplaceall:: (Eq a) => a -> a -> [a] -> [a]
+myreplaceall ain aout inlist
+	|	null inlist				= []
+	|	((head inlist) == aout)	= ain:(myreplaceall ain aout (tail inlist))
+	|	otherwise 				= (head inlist) : (myreplaceall ain aout (tail inlist))
+	
+myreplaceall_pm:: (Eq a) => a -> a -> [a] -> [a]
+myreplaceall_pm i o []		= []
+myreplaceall_pm i o (x:xs)	= if x == o then i:(myreplaceall_pm i o xs)
+								else x:(myreplaceall_pm i o xs)
+
+myordered:: (Ord a) => [a] -> Bool
+myordered list
+	| null list 						= True
+	| null (tail list)					= True
+	| (head list) <= (head (tail list))	= True || myordered (tail list)
+	| otherwise							= False
+	
+myordered_pm:: (Ord a) => [a] -> Bool
+myordered_pm []		= True
+myordered_pm (x:[])	= True
+myordered_pm (x:xs)	= if (x <= (head xs)) then True||(myordered_pm (tail xs))
+						else False
+						
