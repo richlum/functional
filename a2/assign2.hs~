@@ -3,16 +3,6 @@
 -- cs312 assign 2
 -- Sept 29, 2013
 -- ==========================================================
-
--- note: unit tests included in mytests.h, requires Test.HUnit be loaded to run
---    contains all the tests shown on assignment plus a handful of others
- 
--- Main>:l mytests 
--- *Main> runTestTT alltests
--- Cases: 82  Tried: 82  Errors: 0  Failures: 0
--- Counts {cases = 82, tried = 82, errors = 0, failures = 0}
-
--------------------------------------------------------------   
 -- only allowed to use
 --   : head tail null elem
 -- example
@@ -59,7 +49,7 @@ rmdup_pm :: (Eq a) => a -> [a] -> [a]
 rmdup_pm x []           = []
 rmdup_pm x [y]          = if (x == y) then []
                           else [y]
-rmdup_pm x (y:ys)		= if (x == y) then (rmdup_pm x ys)
+rmdup_pm x (y:ys)	= if (x == y) then (rmdup_pm x ys)
                           else (y:(rmdup_pm x ys))
 
 
@@ -97,7 +87,7 @@ mynthtail n list
 	| otherwise  = mynthtail (n-1) (tail list)
 
 mynthtail_pm :: Int -> [a] ->  [a]
-mynthtail_pm 0 (x)    = x   
+mynthtail_pm 0 (x)   = x   
 mynthtail_pm n []     = []
 mynthtail_pm n (x:xs) = mynthtail_pm (n-1) xs
 
