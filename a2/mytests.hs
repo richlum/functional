@@ -1,3 +1,9 @@
+-- This file is only the Unit tests for the assignment
+-- See the other file assign2.hs for the solution code
+
+-- richard lum   41671685
+-- cs312 assignment 2  
+   
 -- must have HUnit modules loaded
 -- to run from ghci, load this file    :l mytests
 -- Main> runTestTT mytests
