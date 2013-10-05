@@ -55,11 +55,11 @@ myremoveduplicates list1
 	| otherwise			= (head list1) : (myremoveduplicates (removeXfrXS (head list1) (tail list1)))
 
 
-
+-- helper function that removes all occurences of given char
 rmdup_pm :: (Eq a) => a -> [a] -> [a]
 rmdup_pm x []           = []
-rmdup_pm x [y]          = if (x == y) then []
-                          else [y]
+-- rmdup_pm x [y]          = if (x == y) then []  -- redundant
+-- 								else [y]
 rmdup_pm x (y:ys)		= if (x == y) then (rmdup_pm x ys)
                           else (y:(rmdup_pm x ys))
 
@@ -105,12 +105,12 @@ mynthtail_pm n (x:xs) = mynthtail_pm (n-1) xs
 -- a2:q4 mylast
 mylast ::  [a] -> [a]
 mylast list 
-	| null list            = []
+	| null list            = []  -- protects against user input null list
 	| (null (tail list) )  = [head list]
 	| otherwise            = (mylast (tail list))
 
 mylast_pm ::  [a] -> [a]
-mylast_pm []		= []
+mylast_pm []		= [] -- protects against user input null list
 mylast_pm (x:[])	= [x]
 mylast_pm (x:xs)	= mylast_pm xs
 
@@ -126,6 +126,8 @@ myreverse' list
 -- that gets built in reverse order with every call to revlist
 -- this allows us to only use the cons operator (a:[a])  and still
 -- reverse order   
+
+-- helper function that works down inlist and builds result in outlist of recursive calls 
 revlist :: [a] -> [a] -> [a]
 revlist inlist outlist
 	| null inlist		= outlist
@@ -137,7 +139,7 @@ myreverse list
 --	| null (tail list)	= list  -- redundant
 	| otherwise			= revlist(tail list) [(head list)]
 
-	
+-- helper function that builds up reversed result from right side in second arg 
 revlist_pm :: [a] -> [a] -> [a]
 revlist_pm [] ys		= ys
 revlist_pm (x:xs) ys	= revlist_pm xs (x:ys)
@@ -164,11 +166,12 @@ myreplaceall_pm i o (x:xs)	= if x == o then i:(myreplaceall_pm i o xs)
 
 -- a2:q7 myordered 
 
+-- true only if each elem is <= prev elem
 myordered:: (Ord a) => [a] -> Bool
 myordered list
 	| null list 						= True
-	| null (tail list)					= True  -- requied condition, not redundant
-	| (head list) <= (head (tail list))	= True || myordered (tail list)
+	| null (tail list)					= True  -- required condition - single element list, not redundant
+	| (head list) <= (head (tail list))	= True || myordered (tail list) -- ok char, check next
 	| otherwise							= False
 	
 myordered_pm:: (Ord a) => [a] -> Bool
