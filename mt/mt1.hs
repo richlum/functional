@@ -1,15 +1,15 @@
 --1
 
-geom:: a-> a->a->a
+geom::(Floating a) =>  a-> a->a->a
 geom a r n
 	| n == 1 	= a
 	| otherwise	= (a * r ** (n-1)) + (geom a r (n-1) )
-geom_tr :: a -> a -> a -> a
+geom_tr :: (Eq a,Floating a) =>  a -> a -> a -> a
 geom_tr a r n
 	| r == 1	= a
 	| otherwise 	= geom_h a r n 0
 
-geom_h :: a => a-> a-> a -> a
+geom_h :: (Floating a) => a -> a-> a-> a -> a
 geom_h a r n accum
 	| n == 0 	= accum
 	| otherwise 	= geom_h a r (n-1) ((a * r**(n-1)) + accum)  
@@ -18,20 +18,20 @@ geom_h a r n accum
 
 --3 
 
-(++') :: [a] -> [a] ->  [a]
-(++') [] ys	= ys
-(++') (x:xs) ys = x:xs ++' ys
+(+!)::[a] -> [a] ->  [a]
+(+!) [] ys	= ys
+(+!) (x:xs) ys = x:xs +! ys
 
 --4
 --5
-repl :: a -> a -> [a] -> [a]
+repl :: (Eq a) => a -> a -> [a] -> [a]
 repl x y list
 	| null list	= []
 	| head list == x	= y:(repl x y (tail list))
 	| head list == y	= x:(repl x y (tail list))
 	| otherwise		= (head list):(repl x y (tail list))
 
-repl_pm : a -> a->[a]->[a]
+repl_pm :: (Eq a) =>  a -> a->[a]->[a]
 repl_pm _ _ []		= []
 repl_pm x y (z:zs)	= if x == z then
 				y:(repl_pm x y zs)
@@ -45,15 +45,19 @@ repl_pm x y (z:zs)	= if x == z then
 
 
 --6
-sc:: [(a,a)] -> a -> a
-sc [] _  	= "?"
+--sc sc :: (Eq a) => [(a, [Char])] -> a -> [Char]
+-- 
+--sc:: (Eq a) => [(Char,Char)] -> a -> Char
+sc [] _  	= '?'
 sc key x 	
 	| fst(head key) == x	= snd(head key)
-	| otherwise		= sc tail key x 
+	| otherwise		= sc (tail key) x 
 
-crypt:: [(a,a)] -> [a] -> [a]
+--crypt:: [(a,a)] -> [a] -> [a]
 crypt key plain
 	| null plain 	= []
 	| otherwise	= sc key (head plain):(crypt key (tail plain))
 
+keystone = zip ['a','b' .. 'z'] ['z','y' .. 'a']
+--crypt key "rolevszhpvoo"
 
